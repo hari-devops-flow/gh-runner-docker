@@ -17,6 +17,11 @@ RUN curl -O -L https://releases.hashicorp.com/terraform/1.10.5/terraform_1.10.5_
     && unzip terraform_1.10.5_linux_amd64.zip -d /usr/local/bin \
     && rm -f terraform_1.10.5_linux_amd64.zip
 
+# AWS CLI 2 installation
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip -d /tmp/ \
+    && /tmp/aws/install 
+
 RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
 
 COPY terraform/start.sh start.sh
