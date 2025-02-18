@@ -1,0 +1,35 @@
+services:
+  github-runner:
+    build:
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+      REPO: hari-devops-flow/3-tier-web-app-aws
+      TOKEN: $GITHUB_TOKEN
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2000M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+  terraform-github-runner:
+    build:
+      dockerfile: ./terraform/Dockerfile
+    restart: always
+    environment:
+      REPO: hari-devops-flow/3-tier-web-app-aws
+      TOKEN: $GITHUB_TOKEN
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2000M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
