@@ -22,7 +22,9 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && unzip awscliv2.zip -d /tmp/ \
     && /tmp/aws/install 
 
+# Neccessary Access to USER docker
 RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
+RUN chown -R docker:docker /home/docker /usr/local/bin/terraform /usr/local/aws-cli
 
 COPY terraform/start.sh start.sh
 
